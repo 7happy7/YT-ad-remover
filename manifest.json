@@ -9,11 +9,11 @@
         "48": "assets/y_48.png",
         "128": "assets/y_128.png"
     },
-    "permissions": ["storage", "*://*.youtube.com", "*://*.youtube.com/*"],
+    "permissions": ["storage", "https://www.youtube.com/*"],
     "web_accessible_resources": ["js/remover.js"],
     "content_scripts": [
         {
-            "matches": ["*://*.youtube.com", "*://*.youtube.com/*"],
+            "matches": ["https://www.youtube.com/*"],
             "js": ["js/remover.js"],
             "run_at": "document_end",
             "all_frames": true
