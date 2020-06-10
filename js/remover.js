@@ -2,8 +2,8 @@ window.addEventListener("load",function() {
     (async function _f(){
         var a=(v)=>document.querySelector(v);
         var b=a("video");
-        if(!b && document.domain=="www.youtube.com"){
-            return await new Promise(r=>(setTimeout(r, 500), _f()));
+        if(!b){
+            return setTimeout(_f, 500);
         }
         b.ontimeupdate=()=>{
             try{
