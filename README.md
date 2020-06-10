@@ -1,2 +1,2 @@
 # YT-ad-remover
-Removing YouTube's ads.
+Chrome extention for removing YouTube's ads.
