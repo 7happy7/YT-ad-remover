@@ -1,4 +1,4 @@
-window.onload=function() {
+window.addEventListener("load",function() {
     (async function _f(){
         var a=(v)=>document.querySelector(v);
         var b=a("video");
@@ -21,4 +21,4 @@ window.onload=function() {
             }catch(e){}
         }
     })();
-}
+});
