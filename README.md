@@ -21,4 +21,4 @@ YT-ad-remover-master
     ├── README.md
     └── manifest.json
 ```
-5. Done!
+5. Done? Then the boss makes YouTube's ads *King-Crimson*ed.
