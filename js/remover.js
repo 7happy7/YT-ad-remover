@@ -5,7 +5,7 @@ window.addEventListener("load",function() {
         if(!b){
             return setTimeout(_f, 500);
         }
-        b.ontimeupdate=()=>{
+        b.addEventListener("ontimeupdate",function() {
             try{
                 var d=a(".ytp-ad-skip-button-slot button,.ytp-ad-overlay-close-button");
                 if(d){
@@ -19,6 +19,6 @@ window.addEventListener("load",function() {
                     b.currentTime=e;
                 }
             }catch(e){}
-        }
+        });
     })();
 });
