@@ -3,7 +3,7 @@ Chrome extension for removing YouTube's ads.
 
 # Install
 1. Download a zip file and unzip it to the local.
-2. Go to Chrome Extension
+2. Go to Chrome Extension.
 > * `chrome://extensions/`
 > * `(config)` > `More tools` > `Extensions`
 3. Enable `Developer mode` (click a toggle at the top of the page).
