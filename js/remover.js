@@ -19,10 +19,9 @@
     XMLHttpRequest.prototype,
     (_,x)=>(
         (x=[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/ads?\-renderer$/i)).map(v=>v.tagName.toLowerCase()).join(',')),
-        x&&(_=_||new CSSStyleSheet).replaceSync(
+        x&&((_=_||new CSSStyleSheet).replaceSync(
             `${x}{position:fixed;right:9999rem}`
-        ),
-        document.adoptedStyleSheets=[_],
+        ),document.adoptedStyleSheets=[_]),
         _
     ),
     _=>{try{_()}catch(e){}}
