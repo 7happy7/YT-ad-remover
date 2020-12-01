@@ -7,7 +7,7 @@
                     (d=a('.ytp-ad-skip-button-slot button,.ytp-ad-overlay-close-button'))&&d.click()
                 )),
                 e(c=>(
-                    a('.ytp-ad-skip-button-slot button,.ytp-ad-overlay-close-button')&&(b.currentTime=b.duration)
+                    a('.ad-showing')&&(b.currentTime=b.duration)
                 ))
             }),
             (t=>(x.send=function(_){(_&&f()),t.call(this,_)}))(x.send)
