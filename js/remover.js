@@ -17,9 +17,10 @@
     (s=f(s))
 })(
     XMLHttpRequest.prototype,
-    _=>(
-        (_=_||new CSSStyleSheet).replaceSync(
-            `${[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/ads?\-renderer$/i)).map(v=>v.tagName.toLowerCase()).join(',')}{position:fixed;right:9999rem}`
+    (_,x)=>(
+        (x=[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/ads?\-renderer$/i)).map(v=>v.tagName.toLowerCase()).join(',')),
+        x&&(_=_||new CSSStyleSheet).replaceSync(
+            `${x}{position:fixed;right:9999rem}`
         ),
         document.adoptedStyleSheets=[_],
         _
