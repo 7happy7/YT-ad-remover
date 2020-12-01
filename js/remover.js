@@ -1,27 +1,28 @@
 (async(x,f,e,r,s)=>{
     (await new Promise(r=>document.readyState=='complete'?r():window.addEventListener('load',r))),
-    (r=(a,b)=>{
+    (r=(a,b,c)=>{
         return(b=a('video'))?(
             b.addEventListener('timeupdate',_=>{
                 e(d=>(
                     (d=a('.ytp-ad-skip-button-slot button,.ytp-ad-overlay-close-button'))&&d.click()
                 )),
-                e(_=>(
+                e(c=>(
                     a('.ytp-ad-skip-button-slot button,.ytp-ad-overlay-close-button')&&(b.currentTime=b.duration)
                 ))
             }),
-            (t=>(x.send=function(_){_&&f(s),t.call(this,_)}))(x.send)
+            (t=>(x.send=function(_){_&&(s=f(s)),t.call(this,_)}))(x.send)
         )
-        :setTimeout(r,350,a)
-    })(s=>document.querySelector(s)),
+        :setTimeout(r,500,a)
+    })(_=>document.querySelector(_)),
     f(s)
 })(
     XMLHttpRequest.prototype,
-    c=>(
-        (s=c||new CSSStyleSheet).replaceSync(
+    _=>(
+        (_=_||new CSSStyleSheet).replaceSync(
             `${[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/ads?\-renderer$/i)).map(v=>v.tagName.toLowerCase()).join(',')}{position:fixed;right:9999rem}`
         ),
-        document.adoptedStyleSheets=[s]
+        document.adoptedStyleSheets=[_],
+        _
     ),
-    f=>{try{f()}catch(e){}}
+    _=>{try{_()}catch(e){}}
 )
