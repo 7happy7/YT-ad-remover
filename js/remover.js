@@ -10,18 +10,18 @@
                     a('.ytp-ad-skip-button-slot button,.ytp-ad-overlay-close-button')&&(b.currentTime=b.duration)
                 ))
             }),
-            (t=>(x.send=function(_){_&&(s=f(s), console.log(s)),t.call(this,_)}))(x.send)
+            (t=>(x.send=function(_){_&&f(),t.call(this,_)}))(x.send)
         )
         :setTimeout(r,500,a)
     })(_=>document.querySelector(_)),
-    (s=f(s))
+    f()
 })(
     XMLHttpRequest.prototype,
     (_,x)=>(
         (x=[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/ads?\-renderer$/i)).map(v=>v.tagName.toLowerCase()).join(',')),
-        x&&((_=_||new CSSStyleSheet).replaceSync(
+        x&&((_=new CSSStyleSheet).replaceSync(
             `${x}{position:fixed;right:9999rem}`
-        ),document.adoptedStyleSheets=[_]),
+        ),document.adoptedStyleSheets=[_],console.log(_)),
         _
     ),
     _=>{try{_()}catch(e){}}
