@@ -10,11 +10,11 @@
                     a('.ytp-ad-skip-button-slot button,.ytp-ad-overlay-close-button')&&(b.currentTime=b.duration)
                 ))
             }),
-            (t=>(x.send=function(_){_&&(s=f(s)),t.call(this,_)}))(x.send)
+            (t=>(x.send=function(_){_&&(s=f(s), console.log(s)),t.call(this,_)}))(x.send)
         )
         :setTimeout(r,500,a)
     })(_=>document.querySelector(_)),
-    f(s)
+    (s=f(s))
 })(
     XMLHttpRequest.prototype,
     _=>(
