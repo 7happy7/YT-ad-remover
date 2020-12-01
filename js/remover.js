@@ -2,7 +2,7 @@
     (await new Promise(r=>document.readyState=='complete'?r():window.addEventListener('load',r))),
     (r=(a,b,c)=>{
         return(b=a('video'))?(
-            b.addEventListener('ontimeupdate',_=>{
+            b.addEventListener('timeupdate',_=>{
                 e(d=>(
                     (d=a('.ytp-ad-skip-button-slot button,.ytp-ad-overlay-close-button'))&&d.click()
                 )),
