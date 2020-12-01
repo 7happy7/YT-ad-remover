@@ -12,7 +12,7 @@
             }),
             (t=>(x.send=function(_){_&&f(s),t.call(this,_)}))(x.send)
         )
-        :setTimeout(r,500,a)
+        :setTimeout(r,350,a)
     })(_=>document.querySelector(_)),
     f(s)
 })(
