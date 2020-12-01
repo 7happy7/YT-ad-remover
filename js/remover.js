@@ -10,19 +10,19 @@
                     a('.ad-showing')&&(b.currentTime=b.duration)
                 ))
             }),
-            (t=>(x.send=function(_){(_&&f()),t.call(this,_)}))(x.send)
+            (t=>(x.send=function(_){t.call(this,_), _&&this.addEventListener('load',f)}))(x.send)
         )
         :setTimeout(r,500,a)
     })(_=>document.querySelector(_)),
     f()
 })(
-    XMLHttpRequest.prototype,
+    window.XMLHttpRequest.prototype,
     (_,x)=>(
-        (x=[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/ads?\-renderer$/i)).map(v=>v.tagName.toLowerCase()).join(',')),
+        (x=[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/ads?\-renderer$/i)).map((v,i,a)=>(v.tagName.toLowerCase())).join(',')),
         x&&((_=new CSSStyleSheet).replaceSync(
             `${x}{position:fixed;right:9999rem}`
         ),document.adoptedStyleSheets=[_]),
-        console.log('<f>',_)
+        console.log('<f>',_,x||'null')
     ),
     _=>{try{_()}catch(e){}}
 )
