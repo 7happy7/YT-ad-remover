@@ -10,11 +10,11 @@
         "128": "assets/y_128.png"
     },
     "permissions": ["storage", "https://www.youtube.com/*"],
-    "web_accessible_resources": ["js/remover.js"],
+    "web_accessible_resources": ["js/*.js"],
     "content_scripts": [
         {
             "matches": ["https://www.youtube.com/*"],
-            "js": ["js/remover.js"],
+            "js": ["js/loader.js"],
             "run_at": "document_end",
             "all_frames": true
         }
