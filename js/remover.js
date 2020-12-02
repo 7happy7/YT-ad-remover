@@ -18,7 +18,7 @@
 })(
     window.XMLHttpRequest.prototype,
     (_,x)=>(
-        (x=[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/ads?\-renderer$/i)).map((v,i,a)=>(v.tagName.toLowerCase())).join(',')),
+        (x=[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/[^a-z]ads?\-renderer$/i)).map((v,i,a)=>(v.tagName.toLowerCase())).join(',')),
         x&&((_=new CSSStyleSheet).replaceSync(
             `${x}{position:fixed;right:9999rem}`
         ),document.adoptedStyleSheets=[_]),
