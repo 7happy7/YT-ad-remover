@@ -2,9 +2,13 @@
     glb._audioEP = {};
     glb._audioEP.itag = {};
     glb._audioEP.btn = document.createElement('button');
-    (document.querySelector('#buttons') || document.body).appendChild(glb._audioEP.btn);
+    document.body.appendChild(glb._audioEP.btn);
     glb._audioEP.btn.innerText = 'mp3';
-    glb._audioEP.btn.onclick = e=>{var t = glb._audioEP.itag[ Object.keys(glb._audioEP.itag).sort((a,b)=>a<b?1:-1)[0] ]; t && t.d()}
+    glb._audioEP.btn.setAttribute('style','background:#065fd4;color:#fff;font-size:1.5em;font-weight:bold;position:fixed;bottom:0;left:0;outline: none!important;padding: .5em 1em;border: none!important;box-shadow: 0 0 3px #065fd4;cursor: pointer;');
+    glb._audioEP.btn.onclick = e=>{
+        var t = glb._audioEP.itag[ Object.keys(glb._audioEP.itag).sort((a,b)=>a<b?1:-1)[0] ];
+        t && t.length==1 ? (t[0].d()) : (confirm(`Caution: ${t.length} audio files detected. Please check out each "file size" on next dialogs.`) && t.forEach(v=>v.d()));
+    }
     (async(x,f,m,e,r,s)=>{
         (await new Promise(r=>document.readyState=='complete'?r():window.addEventListener('load',r))),
         (r=(a,b,c)=>{
@@ -31,15 +35,18 @@
             ),document.adoptedStyleSheets=[_]),
             console.log('<f>',_,x||'null')
         ),
-        (_,x,i,t)=>{
-            (x = _.target.responseURL, x.match(/mime=audio%2Fweb[am]/) && window.ytplayer && ytplayer.config && ytplayer.config.args && x.match(decodeURIComponent(ytplayer.config.args.raw_player_response.streamingData.adaptiveFormats[0].signatureCipher).split(/\?|&/).find(v=>v.match(/^id=/))) && (
+        async(_,x,f,o,i,t,z)=>{
+            (x = _.target.responseURL, x.match(/mime=audio%2Fweb[am]/) && (
                 i = (location.href.split(/\?|&/).find(v=>v.match(/^v=/))||'').replace(/^v=/,''),
+                f = await fetch(`/get_video_info?video_id=${i}`),
+                o = {},
+                decodeURIComponent(await f.text()).match(/.+?=.*?(&|$)/g).forEach(v=>(m=>(o[m[1]]=(t=>{try{return JSON.parse(t)}catch(e){return t}})(m[2])))(v.match(/(.+?)=(.*?)(?:&|$)/))),
                 t = x.match(/itag=(\d+?)&/)[1],
-
-                x = x.replace(/(&range=)[0-9-]*?(&)/ig, '$10-99999999999999$2'),
-                (document.querySelector('#buttons') || document.body).appendChild(glb._audioEP.btn),
+                x = x.replace(/(&range=)[0-9-]*?(&)/ig, '$10-999999999999999$2'),
                 glb._audioEP.itag = glb._audioEP.id==i ? (glb._audioEP.itag || {}) : (glb._audioEP.id = i, {}),
-                glb._audioEP.itag[t] = glb._audioEP.itag[t] || new dl(x,i,ytplayer.config.args.title)
+                glb._audioEP.itag[t] = glb._audioEP.itag[t] || [],
+                z = new dl(x,i,o.player_response.videoDetails.title),
+                glb._audioEP.itag[t].find(v=>v.u.match( z.u.match(/(id=.+?)&/)[1] )) || glb._audioEP.itag[t].push(z)
             ))
         },
         _=>{try{_()}catch(e){}}
@@ -51,9 +58,10 @@
             this.t = t||'sample', this.i = i, this.u = u, this.a = document.createElement('a')
         }
         async d() {
-            confirm(`are you sure you want to download "${this.t}.mp3 (id: ${this.i})"?`) && (
+            var b = new Blob([await(await fetch(this.u)).arrayBuffer()],{type:'audio/mp3'});
+            confirm(`Do you want to download "${this.t}.mp3"?\n(file size: ${(b.size/1024).toLocaleString()} kb)`) && (
                 this.a.setAttribute('download', `${this.t}.mp3`),
-                this.a.href = URL.createObjectURL(new Blob([await(await fetch(this.u)).arrayBuffer()],{type:'audio/mp3'})),
+                this.a.href = URL.createObjectURL(b),
                 this.a.click()
             )
         }
