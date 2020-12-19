@@ -1,5 +1,5 @@
 # YT-ad-remover
-Chrome extension for removing YouTube's ads.
+Chrome extension for removing YouTube's ads and downloading audio files as mp3.
 
 # Install
 1. Download a zip file and unzip it to the local.
