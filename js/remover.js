@@ -37,16 +37,17 @@
         ),
         async(_,x,f,o,i,t,z)=>{
             (x = _.target.responseURL, x.match(/mime=audio%2Fweb[am]/) && (
-                i = (location.href.split(/\?|&/).find(v=>v.match(/^v=/))||'').replace(/^v=/,''),
-                f = await fetch(`/get_video_info?video_id=${i}`),
-                o = {},
-                decodeURIComponent(await f.text()).match(/.+?=.*?(&|$)/g).forEach(v=>(m=>(o[m[1]]=(t=>{try{return JSON.parse(t)}catch(e){return t}})(m[2])))(v.match(/(.+?)=(.*?)(?:&|$)/))),
-                t = x.match(/itag=(\d+?)&/)[1],
-                x = x.replace(/(&range=)[0-9-]*?(&)/ig, '$10-999999999999999$2'),
-                glb._audioEP.itag = glb._audioEP.id==i ? (glb._audioEP.itag || {}) : (glb._audioEP.id = i, {}),
-                glb._audioEP.itag[t] = glb._audioEP.itag[t] || [],
-                z = new dl(x,i,o.player_response.videoDetails.title),
-                glb._audioEP.itag[t].find(v=>v.u.match( z.u.match(/(id=.+?)&/)[1] )) || glb._audioEP.itag[t].push(z)
+                (i = (location.href.split(/\?|&/).find(v=>v.match(/^v=/))||'').replace(/^v=/,'')) && (
+                    f = await fetch(`/get_video_info?video_id=${i}`),
+                    o = {},
+                    decodeURIComponent(await f.text()).match(/.+?=.*?(&|$)/g).forEach(v=>(m=>(o[m[1]]=(t=>{try{return JSON.parse(t)}catch(e){return t}})(m[2])))(v.match(/(.+?)=(.*?)(?:&|$)/))),
+                    t = x.match(/itag=(\d+?)&/)[1],
+                    x = x.replace(/(&range=)[0-9-]*?(&)/ig, '$10-999999999999999$2'),
+                    glb._audioEP.itag = glb._audioEP.id==i ? (glb._audioEP.itag || {}) : (glb._audioEP.id = i, {}),
+                    glb._audioEP.itag[t] = glb._audioEP.itag[t] || [],
+                    o.player_response && (z = new dl(x,i,o.player_response.videoDetails.title)),
+                    z && (glb._audioEP.itag[t].find(v=>v.u.match( z.u.match(/(id=.+?)&/)[1] )) || glb._audioEP.itag[t].push(z))
+                )
             ))
         },
         _=>{try{_()}catch(e){}}
