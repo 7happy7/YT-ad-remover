@@ -16,6 +16,7 @@ YT-ad-remover-master
     │   ├── y_48.png
     │   └── y_16.png
     ├── js
+    │   ├── loader.js
     │   └── remover.js
     ├── .gitignore
     ├── README.md
