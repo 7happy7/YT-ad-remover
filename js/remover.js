@@ -1,4 +1,4 @@
-((glb,dl)=>{
+((glb,dl,ads)=>{
     glb._audioEP = {};
     glb._audioEP.itag = {};
     glb._audioEP.btn = document.createElement('button');
@@ -21,7 +21,8 @@
                         a('.ad-showing')&&(b.currentTime=b.duration)
                     ))
                 }),
-                (t=>(x.send=function(_,u){ t.call(this,_), this.addEventListener('load',_?f:m) }))(x.send)
+                (t=>(x.send=function(_){t.call(this,_), this.addEventListener('load',_?f:m)}))(x.send),
+                (t=>(x.open=function(){(a=>a[1].match(ads) ? (console.log(`Blocked: "${a[1]}"`), this.abort && this.abort()) : t.call(this,...a))(arguments)}))(x.open)
             )
             :setTimeout(r,500,a)
         })(_=>document.querySelector(_)),
@@ -37,7 +38,8 @@
         ),
         async(_,x,f,o,i,t,z)=>{
             (x = _.target.responseURL, x.match(/mime=audio%2Fweb[am]/) && (
-                (i = (location.href.split(/\?|&/).find(v=>v.match(/^v=/))||'').replace(/^v=/,'')) && (
+                i = (location.href.split(/\?|&/).find(v=>v.match(/^v=/))||'').replace(/^v=/,''),
+                i && (
                     f = await fetch(`/get_video_info?video_id=${i}`),
                     o = {},
                     decodeURIComponent(await f.text()).match(/.+?=.*?(&|$)/g).forEach(v=>(m=>(o[m[1]]=(t=>{try{return JSON.parse(t)}catch(e){return t}})(m[2])))(v.match(/(.+?)=(.*?)(?:&|$)/))),
@@ -66,5 +68,39 @@
                 this.a.click()
             )
         }
-    }
+    },
+    new RegExp(
+        [
+            "doubleclick.net",
+            "adservice.google.",
+            "youtube.com/api/stats/ads",
+            "&ad_type=",
+            "&adurl=",
+            "-pagead-id.",
+            "doubleclick.com",
+            "/ad_status.",
+            "/api/ads/",
+            "/googleads",
+            "/pagead/gen_",
+            "/pagead/lvz?",
+            "/pubads.",
+            "/pubads_",
+            "/securepubads",
+            "=adunit&",
+            "googlesyndication.com",
+            "innovid.com",
+            "youtube.com/pagead/",
+            "google.com/pagead/",
+            "flashtalking.com",
+            "googleadservices.com",
+            "s0.2mdn.net/ads",
+            "www.youtube.com/ptracking",
+            "www.youtube.com/pagead",
+            "www.youtube.com/get_midroll_"
+        ].map(
+            v=>`(${v})`
+        ).join(
+            '|'
+        )
+    )
 )
