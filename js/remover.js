@@ -33,8 +33,7 @@
             (x=[...document.querySelectorAll('body *')].filter(e=>e.tagName.match(/[^a-z]ads?\-renderer$/i)).map((v,i,a)=>(v.tagName.toLowerCase())).join(',')),
             x&&((_=new CSSStyleSheet).replaceSync(
                 `${x}{position:fixed;right:9999rem}`
-            ),document.adoptedStyleSheets=[_]),
-            console.log('<f>',_,x||'null')
+            ),document.adoptedStyleSheets=[_])
         ),
         async(_,x,f,o,i,t,z)=>{
             (x = _.target.responseURL, x.match(/mime=audio%2Fweb[am]/) && (
