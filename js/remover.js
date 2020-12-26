@@ -33,7 +33,7 @@
 
     glb._audioEP.btn.onclick = e=>{
         var t = glb._audioEP.itag[ Object.keys(glb._audioEP.itag).sort((a,b)=>a<b?1:-1)[0] ];
-        t && t.length==1 ? (t[0].d()) : (confirm(`注意: 音声ファイルが${t.length}個あります。次に表示されるダイアログの"file size"を確認してください。`) && t.forEach(v=>v.d()));
+        t && t.length==1 ? (t[0].d()) : (confirm(`Caution: ${t.length} audio files detected. Please check out each "file size" on next dialogs.`) && t.forEach(v=>v.d()));
     };
 
     document.addEventListener('fullscreenchange', e=>{
@@ -172,7 +172,7 @@
         }
         async d() {
             var b = new Blob([await(await fetch(this.u)).arrayBuffer()],{type:'audio/mp3'});
-            confirm(`"${this.t}.mp3"をダウンロードしますか？\n(file size: ${(b.size/1024).toLocaleString()} kb)`) && (
+            confirm(`Do you want to download "${this.t}.mp3"?\n(file size: ${(b.size/1024).toLocaleString()} kb)`) && (
                 this.a.setAttribute('download', `${this.t}.mp3`),
                 this.a.href = URL.createObjectURL(b),
                 this.a.click()
