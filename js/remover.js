@@ -130,7 +130,7 @@
                                 break;
                             }
                         }
-                        var c = this.o.command[q.do.s];console.log(q,c);
+                        var c = this.o.command[q.do.s];
                         c && (
                             q.do.k
                                 ? c[q.key.s] && (this.e.innerHTML += c[q.key.s](this,q.key.g))
