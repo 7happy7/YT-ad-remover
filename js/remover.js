@@ -73,7 +73,7 @@
                             bool: (_,s)=>(s = s.toLowerCase(), d = s=='on', ` [Repeat mode: ${s}]`)
                         },
                         repeat: (_)=>(d = true, ' [Repeat mode: on]'),
-                        initial: (_)=>(b.currentTime = 0, ' [Seek to the begining seconds]'),
+                        initial: (_)=>(b.currentTime = 0, ' [Seek to the begining]'),
                         pause: (_)=>(b.pause(), ' [Pause]'),
                         play: (_)=>(b.play(), ' [Play]')
                     }
