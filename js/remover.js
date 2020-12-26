@@ -46,36 +46,36 @@
             return(b=a('video'))?(
                 c = new f(glb._audioEP.cont,{
                     do:[
-                        {name: 'controll', reg: /(?:音声|)コントロール/, key: true},
-                        {name: 'backward', reg: /(?:巻き|)戻(?:し|す|せ|る|れ|って)/, key: true},
-                        {name: 'forward', reg: /進(?:み|む|め|んで)|先?送(?:り|る|れ|って)/, key: true},
-                        {name: 'repeat_', reg: /^リピート./, key: true},
-                        {name: 'repeat', reg: /^リピート$/, key: false},
-                        {name: 'initial', reg: /最初から/, key: false},
-                        {name: 'pause', reg: /ストップ|ポーズ|停止/, key: false},
-                        {name: 'play', reg: /スタート|プレイ|再生/, key: false},
+                        {name: 'controll', reg: /controll mode/i, key: true},
+                        {name: 'backward', reg: /backward/i, key: true},
+                        {name: 'forward', reg: /forward/i, key: true},
+                        {name: 'repeat_', reg: /^repeat./i, key: true},
+                        {name: 'repeat', reg: /^repeat$/i, key: false},
+                        {name: 'initial', reg: /ab init|initial|restart/, key: false},
+                        {name: 'pause', reg: /pause|stop/i, key: false},
+                        {name: 'play', reg: /play|start/i, key: false},
                     ],
                     key:[
-                        {name: 'sec', reg: /(\d+)秒/},
-                        {name: 'bool', reg: /(on|off|オン|オフ)/i}
+                        {name: 'sec', reg: /(\d+) sec/i},
+                        {name: 'bool', reg: /(on|off)/i}
                     ],
                     command:{
                         controll: {
-                            bool: (_,s)=>(s = s.toLowerCase(), s=='on'||s=='オン'||(_audioEP.cont_check.checked = !1, _.stop()), ` [音声コントロール"オフ"]`)
+                            bool: (_,s)=>(s = s.toLowerCase(), s=='on'||(_audioEP.cont_check.checked = !1, _.stop()), ` [Controll mode: off]`)
                         },
                         backward: {
-                            sec: (_,s)=>(b.currentTime = b.currentTime - Number(s), ` ["${s}"秒戻る]`)
+                            sec: (_,s)=>(b.currentTime = b.currentTime - Number(s), ` [Seek backward "${s}" seconds]`)
                         },
                         forward: {
-                            sec: (_,s)=>(b.currentTime = b.currentTime + Number(s), ` ["${s}"秒進む]`)
+                            sec: (_,s)=>(b.currentTime = b.currentTime + Number(s), ` [Seek forward "${s}" seconds]`)
                         },
                         repeat_: {
-                            bool: (_,s)=>(s = s.toLowerCase(), d = s=='on'||s=='オン', ` [リピート"${d}"]`)
+                            bool: (_,s)=>(s = s.toLowerCase(), d = s=='on', ` [Repeat mode: ${s}]`)
                         },
-                        repeat: (_)=>(d = true, ' [リピート"true"]'),
-                        initial: (_)=>(b.currentTime = 0, ' [最初から]'),
-                        pause: (_)=>(b.pause(), ' [一時停止]'),
-                        play: (_)=>(b.play(), ' [再生]')
+                        repeat: (_)=>(d = true, ' [Repeat mode: on]'),
+                        initial: (_)=>(b.currentTime = 0, ' [Seek to the begining seconds]'),
+                        pause: (_)=>(b.pause(), ' [Pause]'),
+                        play: (_)=>(b.play(), ' [Play]')
                     }
                 }),
                 glb._audioEP.cont_check.addEventListener('change', e =>{
@@ -101,7 +101,7 @@
                 this.r = new webkitSpeechRecognition;
                 this.r.continuous = !0;
                 this.r.interimResults = !0;
-                this.r.lang = 'ja-JP';
+                this.r.lang = 'en-US';
                 this.e = e;
                 this.o = o;
             }
