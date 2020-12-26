@@ -47,7 +47,7 @@
                 c = new f(glb._audioEP.cont,{
                     do:[
                         {name: 'controll', reg: /(?:音声|)コントロール/, key: true},
-                        {name: 'backward', reg: /(?:巻き|)戻(?:し|す|せ|って)/, key: true},
+                        {name: 'backward', reg: /(?:巻き|)戻(?:し|す|せ|る|れ|って)/, key: true},
                         {name: 'forward', reg: /進(?:み|む|め|んで)|先?送(?:り|る|れ|って)/, key: true},
                         {name: 'repeat_', reg: /^リピート./, key: true},
                         {name: 'repeat', reg: /^リピート$/, key: false},
