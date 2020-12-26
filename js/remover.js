@@ -56,7 +56,7 @@
                         {name: 'play', reg: /play|start/i, key: false},
                     ],
                     key:[
-                        {name: 'sec', reg: /(\d+) sec/i},
+                        {name: 'sec', reg: /(\d+) sec(?:onds?| |$)/i},
                         {name: 'bool', reg: /(on|off)/i}
                     ],
                     command:{
