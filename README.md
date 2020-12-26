@@ -1,3 +1,8 @@
+# Language
+**[English](https://github.com/7happy7/YT-ad-remover/tree/en-US)**<br>
+**[日本語](https://github.com/7happy7/YT-ad-remover/tree/en-US)**
+
+----
 # YT-ad-remover
 Chrome extension for removing YouTube's ads and downloading audio files as mp3.
 
