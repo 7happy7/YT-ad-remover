@@ -46,6 +46,7 @@
             return(b=a('video'))?(
                 c = new f(glb._audioEP.cont,{
                     do:[
+                        {name: 'controll', reg: /(?:音声|)コントロール/, key: true},
                         {name: 'backward', reg: /(?:巻き|)戻(?:し|す|せ|って)/, key: true},
                         {name: 'forward', reg: /進(?:み|む|め|んで)|先?送(?:り|る|れ|って)/, key: true},
                         {name: 'repeat_', reg: /^リピート./, key: true},
@@ -59,6 +60,9 @@
                         {name: 'bool', reg: /(on|off|オン|オフ)/i}
                     ],
                     command:{
+                        controll: {
+                            bool: (_,s)=>(s = s.toLowerCase(), s=='on'||s=='オン'||(_audioEP.cont_check.checked = !1, _.stop()), ` [音声コントロール"オフ"]`)
+                        },
                         backward: {
                             sec: (_,s)=>(b.currentTime = b.currentTime - Number(s), ` ["${s}"秒戻る]`)
                         },
