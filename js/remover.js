@@ -56,12 +56,15 @@
                         {name: 'play', reg: /play|start/i, key: false},
                     ],
                     key:[
-                        {name: 'sec', reg: /(\d+) sec(?:onds?| |$)/i},
-                        {name: 'bool', reg: /(on|off)/i}
+                        {name: 'sec', value: t=>((h,m,s)=>(t=t.replace(/(?:^| )(an|\d+?) hours?/,(_,a)=>(h=Number(a=='an'||!isNaN(a)&&a),' ')),t=t.replace(/(?:^| )(an|\d+?) min(?:utes?| |$)/,(_,a)=>(m=Number(a=='an'||!isNaN(a)&&a),' ')),t=t.replace(/(?:^| )(an|\d+?) sec(?:onds?| |$)/,(_,a)=>(s=Number(a=='an'||!isNaN(a)&&a),' ')),h*3600+m*60+s))(0,0,0)},
+                        {name: 'bool', value: t=>(m=>m&&m[1])(t.match(/(on|off)/i))}
                     ],
                     command:{
                         controll: {
                             bool: (_,s)=>(s = s.toLowerCase(), s=='on'||(_audioEP.cont_check.checked = !1, _.stop()), ` [Controll mode: off]`)
+                        },
+                        seek: {
+                            sec: (_,s)=>(b.currentTime = Number(s), ` [Seek to "${s}" seconds]`)
                         },
                         backward: {
                             sec: (_,s)=>(b.currentTime = b.currentTime - Number(s), ` [Seek backward "${s}" seconds]`)
@@ -123,10 +126,10 @@
                             }
                         }
                         for(var k of this.o.key) {
-                            var x = a.match(k.reg);
+                            var x = k.value(a);
                             if(x) {
                                 q.key.s = k.name;
-                                x[1] && (q.key.g = x[1]);
+                                q.key.g = x;
                                 break;
                             }
                         }
