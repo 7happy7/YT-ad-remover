@@ -56,7 +56,7 @@
                         {name: 'play', reg: /play|start/i, key: false},
                     ],
                     key:[
-                        {name: 'sec', value: t=>((h,m,s)=>(t=t.replace(/(?:^| )(an|\d+?) hours?/,(_,a)=>(h=Number(a=='an'||!isNaN(a)&&a),' ')),t=t.replace(/(?:^| )(an|\d+?) min(?:utes?| |$)/,(_,a)=>(m=Number(a=='an'||!isNaN(a)&&a),' ')),t=t.replace(/(?:^| )(an|\d+?) sec(?:onds?| |$)/,(_,a)=>(s=Number(a=='an'||!isNaN(a)&&a),' ')),h*3600+m*60+s))(0,0,0)},
+                        {name: 'sec', value: t=>((h,m,s)=>(t=t.replace(/(?:^| )(an|\d+?) hours?/,(_,a)=>(h=Number(a=='an'||!isNaN(a)&&a),' ')),t=t.replace(/(?:^| )(a|\d+?) min(?:utes?| |$)/,(_,a)=>(m=Number(a=='a'||!isNaN(a)&&a),' ')),t=t.replace(/(?:^| )(a|\d+?) sec(?:onds?| |$)/,(_,a)=>(s=Number(a=='a'||!isNaN(a)&&a),' ')),h*3600+m*60+s))(0,0,0)},
                         {name: 'bool', value: t=>(m=>m&&m[1])(t.match(/(on|off)/i))}
                     ],
                     command:{
