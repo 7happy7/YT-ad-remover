@@ -47,6 +47,7 @@
                 c = new f(glb._audioEP.cont,{
                     do:[
                         {name: 'controll', reg: /(?:音声|)コントロール/, key: true},
+                        {name: 'seek', reg: /シーク|移動/, key: true},
                         {name: 'backward', reg: /(?:巻き|)戻(?:し|す|せ|る|れ|って)/, key: true},
                         {name: 'forward', reg: /進(?:み|む|め|んで)|先?送(?:り|る|れ|って)/, key: true},
                         {name: 'repeat_', reg: /^リピート./, key: true},
@@ -56,12 +57,15 @@
                         {name: 'play', reg: /スタート|プレイ|再生/, key: false},
                     ],
                     key:[
-                        {name: 'sec', reg: /(\d+)秒/},
-                        {name: 'bool', reg: /(on|off|オン|オフ)/i}
+                        {name: 'sec', value: t=>((a,s)=>([...Array(a.length-1)].forEach((v,i)=>s||(s=t.match(new RegExp((i=Number(i),a.slice(0,i+1).join('|')+a.slice(i+1).join('|')))))&&(s=s.slice(1).map(v=>Number(!isNaN(v)&&v)),s=s[0]*3600+s[1]*60+s[2])),s))(['(?:(\\d+?)時間', ')(?:(\\d+?)分', ')(?:(\\d+?)秒', ')'])},
+                        {name: 'bool', value: t=>(m=>m&&m[1])(t.match(/(on|off|オン|オフ)/i))}
                     ],
                     command:{
                         controll: {
                             bool: (_,s)=>(s = s.toLowerCase(), s=='on'||s=='オン'||(_audioEP.cont_check.checked = !1, _.stop()), ` [音声コントロール"オフ"]`)
+                        },
+                        seek: {
+                            sec: (_,s)=>(b.currentTime = Number(s), ` ["${s}"秒に移動]`)
                         },
                         backward: {
                             sec: (_,s)=>(b.currentTime = b.currentTime - Number(s), ` ["${s}"秒戻る]`)
@@ -123,10 +127,10 @@
                             }
                         }
                         for(var k of this.o.key) {
-                            var x = a.match(k.reg);
+                            var x = k.value(a);
                             if(x) {
                                 q.key.s = k.name;
-                                x[1] && (q.key.g = x[1]);
+                                q.key.g = x;
                                 break;
                             }
                         }
