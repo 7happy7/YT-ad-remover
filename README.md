@@ -1,3 +1,9 @@
+> This tool is out-dated. Please use the new edition!
+> 
+> * https://github.com/7happy7/new_YT-ad-remover/
+
+----
+
 # YT-ad-remover
 Chrome extension for removing YouTube's ads and downloading audio files as mp3.
 
