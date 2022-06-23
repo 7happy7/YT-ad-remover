@@ -1,4 +1,4 @@
-> 本ツールは9番です。新版をご利用ください。
+> 本ツールは旧版です。新版をご利用ください。
 > 
 > * https://github.com/7happy7/new_YT-ad-remover/
 
