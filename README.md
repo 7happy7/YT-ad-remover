@@ -1,3 +1,10 @@
+> 本ツールは9番です。新版をご利用ください。
+> 
+> * https://github.com/7happy7/new_YT-ad-remover/
+
+----
+
+
 # YT-ad-remover
 YouTubeの広告の除去、mp3のダウンロードなどを行うChrome拡張です。
 
